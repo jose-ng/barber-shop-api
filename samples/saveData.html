@@ -38,14 +38,15 @@
           id
           name
           role
-          points
+          email
         }
       }
     `,
         variables: {
           dto: {
             name: "Luz",
-            role: "client"
+            role: "client",
+            email: "a@a.com"
           }
         },
       };
@@ -54,9 +55,10 @@
           const dataContainer = document.getElementById('data');
           dataContainer.innerHTML = '';
 
-          const { errors, register: user } = res.data.data;
+          const { errors } = res.data;
           if (errors) throw new Error(errors[0].message);
 
+          const { register: user } = res.data.data;
           const div = document.createElement('div');
           div.className = 'item';
           div.innerHTML = `<h2>${user.name}</h2><p>${user.role}</p>`;

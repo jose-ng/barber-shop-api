@@ -47,9 +47,10 @@
           const dataContainer = document.getElementById('data');
           dataContainer.innerHTML = '';
 
-          const { errors, users } = res.data.data;
+          const { errors } = res.data;
           if (errors) throw new Error(errors[0].message);
 
+          const { users } = res.data.data;
           users.forEach(item => {
             const div = document.createElement('div');
             div.className = 'item';

@@ -1,0 +1,23 @@
+{
+  "name": "barberia-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "4.10.4",
+    "@graphql-tools/load-files": "7.0.0",
+    "express": "4.19.2",
+    "graphql": "16.8.2",
+    "graphql-scalars": "^1.23.0"
+  },
+  "engines": {
+    "node": "~20.x",
+    "npm": "~10.x"
+  }
+}

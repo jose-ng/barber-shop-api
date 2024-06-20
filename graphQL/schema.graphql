@@ -1,0 +1,54 @@
+type User {
+  id: ID!
+  name: String!
+  role: String!
+  points: Int
+}
+
+type Service {
+  id: ID!
+  name: String!
+  points: Int!
+}
+
+type Reward {
+  id: ID!
+  name: String!
+  points: Int!
+}
+
+type Appointment {
+  id: ID!
+  userId: ID!
+  serviceId: ID!
+  date: Date!
+}
+
+input registerDto {
+  name: String!
+  role: String!
+}
+
+# Auth Response
+type AuthResponse {
+  token: String!
+}
+
+type Query {
+  users: [User]
+  appointments: [Appointment]
+  appointmentsByDate(date: String!): [Appointment]
+  appointmentsByUserId(userId: ID!): [Appointment]
+  rewards: [Reward]
+  services: [Service]
+}
+
+type Mutation {
+  login(email: String!, password: String!): AuthResponse 
+  register(dto: registerDto!): User
+  addAppointment(userId: ID!, serviceId: ID!, date: String!): Appointment
+  addService(name: String!, points: Int!): Service
+  addReward(name: String!, points: Int!): Reward
+  redeemReward(userId: ID!, rewardId: ID!): String
+}
+

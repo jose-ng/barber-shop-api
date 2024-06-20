@@ -1,7 +1,7 @@
 // globals
 let users = [
-  { id: "1", name: "John Doe", role: "admin" },
-  { id: "2", name: "Tim Burton", role: "client", points: 0 }
+  { id: "1", name: "John Doe", email: "admin@e.com", password: "12345", role: "admin" },
+  { id: "2", name: "Tim Burton", email: "client@e.com", password: "12345", role: "client", points: 0 }
 ];
 let services = [];
 let rewards = [];
@@ -17,9 +17,19 @@ const resolvers = {
     services: () => services,
   },
   Mutation: {
+    login: (_, { email, password }) => {
+      const fakeToken = `${btoa(JSON.stringify({ alg: "HS256", typ: "JWT" }))}.${btoa(JSON.stringify({ sub: "1234567890", name: "John Doe", iat: Math.floor(Date.now() / 1000) }))}.fakeSignature`;
+      const user = users.find(u => u.email === email && u.password === password);
+      if (!user) {
+        throw new Error('User not found');
+      }
+      return {
+        token: fakeToken
+      }
+    },
     register: (_, { dto }) => {
-      const { name, role } = dto;
-      const user = { id: `${users.length + 1}`, name, role, points: 0 };
+      const { name, role, email } = dto;
+      const user = { id: `${users.length + 1}`, name, role, points: 0, email, password: "12345" };
       users.push(user);
       return user;
     },

@@ -2,6 +2,7 @@ type User {
   id: ID!
   name: String!
   role: String!
+  email: String!
   points: Int
 }
 
@@ -21,12 +22,13 @@ type Appointment {
   id: ID!
   userId: ID!
   serviceId: ID!
-  date: Date!
+  date: DateTime!
 }
 
 input registerDto {
   name: String!
   role: String!
+  email: String!
 }
 
 # Auth Response

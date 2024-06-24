@@ -8,20 +8,20 @@ type User {
 
 type Service {
   id: ID!
-  name: String!
+  desc: String!
   points: Int!
 }
 
 type Reward {
   id: ID!
-  name: String!
+  desc: String!
   points: Int!
 }
 
 type Appointment {
   id: ID!
   userId: ID!
-  serviceId: ID!
+  services: [Service]
   date: DateTime!
 }
 
@@ -31,13 +31,19 @@ input registerDto {
   email: String!
 }
 
-# Auth Response
+input appointmentDto {  
+  userId: ID!
+  userServices: [String]!
+  date: DateTime!
+}
+
 type AuthResponse {
   token: String!
 }
 
 type Query {
   users: [User]
+  getUserId: User
   appointments: [Appointment]
   appointmentsByDate(date: String!): [Appointment]
   appointmentsByUserId(userId: ID!): [Appointment]
@@ -48,7 +54,7 @@ type Query {
 type Mutation {
   login(email: String!, password: String!): AuthResponse 
   register(dto: registerDto!): User
-  addAppointment(userId: ID!, serviceId: ID!, date: String!): Appointment
+  addAppointment(dto: appointmentDto!): Appointment
   addService(name: String!, points: Int!): Service
   addReward(name: String!, points: Int!): Reward
   redeemReward(userId: ID!, rewardId: ID!): String

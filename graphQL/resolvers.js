@@ -3,10 +3,21 @@ let users = [
   { id: "1", name: "John Doe", email: "admin@e.com", password: "12345", role: "admin" },
   { id: "2", name: "Tim Burton", email: "client@e.com", password: "12345", role: "client", points: 0 }
 ];
-let services = [];
-let rewards = [];
+let services = [
+  { id: "1", desc: "corte", points: 10 },
+  { id: "2", desc: "barba", points: 10 },
+  { id: "3", desc: "tinte", points: 10 },
+  { id: "4", desc: "ceja", points: 10 }
+];
+let rewards = [
+  { id: "1", score: 200, desc: "peine" },
+  { id: "2", score: 100, desc: "corte gratis" },
+  { id: "3", score: 500, desc: "tinte gratis" },
+  { id: "4", score: 300, desc: "corte barba gratis" }
+];
 let appointments = [];
-
+// una cita puede tener varios servicios
+// Cada servicio tiene un puntaje
 const resolvers = {
   Query: {
     users: () => users,
@@ -29,7 +40,7 @@ const resolvers = {
     },
     register: (_, { dto }) => {
       const { name, role, email } = dto;
-      const user = { id: `${users.length + 1}`, name, role, points: 0, email, password: "12345" };
+      const user = { id: `${users.length + 1}`, name, role: "client", points: 0, email, password: "12345" };
       users.push(user);
       return user;
     },
@@ -43,16 +54,26 @@ const resolvers = {
       rewards.push(reward);
       return reward;
     },
-    addAppointment: (_, { userId, serviceId, date }) => {
-      const appointment = { id: `${appointments.length + 1}`, userId, serviceId, date };
-      appointments.push(appointment);
+    addAppointment: (_, { dto }) => {
+      const { userId, userServices, date } = dto;
+      const _userServices = userServices.map((id, index) => {
+        const service = services.find(s => s.id === id);
+        return {
+          id: `${index}`,
+          points: service.points,
+          desc: service.desc
+        }
+      });
+      console.log("🚀 ~ const_userServices=userServices.map ~ _userServices:", _userServices)
 
-      const user = users.find(c => c.id === userId);
-      const service = services.find(s => s.id === serviceId);
-      if (user && service) {
-        user.points += service.points;
+      const appointment = {
+        id: `${appointments.length + 1}`,
+        userId,
+        services: _userServices,
+        date
       }
 
+      appointments.push(appointment);
       return appointment;
     },
     redeemReward: (_, { userId, rewardId }) => {
@@ -68,3 +89,4 @@ const resolvers = {
 };
 
 module.exports = resolvers;
+console.log(new Date().toISOString())

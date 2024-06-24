@@ -1,6 +1,6 @@
 # Barberia API
 
-This is a small project for a barber shop API.
+This is a small project for a barber shop Node.js API.
 
 ## Installation
 
@@ -14,6 +14,13 @@ This is a small project for a barber shop API.
 - NodeJs
 - ExpressJs
 - GraphQL
+
+## Prerequisites
+
+Ensure you have Node.js installed on your machine:
+
+- Recommended minimum version: 14.x
+- Highly recommended version: 18.x or 20.x (LTS)
 
 ## Notes
 
@@ -31,7 +38,3 @@ This is a small project for a barber shop API.
 - Connect to a data base to persist data
 - Add cors
 - Add authentication
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).

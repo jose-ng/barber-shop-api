@@ -19,6 +19,7 @@ const useGraphQL = async (app) => {
     typeDefs,
     resolvers: allResolvers,
     playground: true,
+    introspection: true,
     plugins: [
       ApolloServerPluginLandingPageLocalDefault({ footer: false }),
     ],

@@ -13,21 +13,6 @@ async function startServer() {
     app.use(express.json());
 
     // All domains are allowed
-    // const whitelist = [
-    //   'http://localhost:3000',
-    //   'http://localhost:4000',
-    // ];
-    // const corsOptions = {
-    //   origin: (origin, callback) => {
-    //     if (whitelist.indexOf(origin) !== -1 || !origin) {
-    //       callback(null, true);
-    //     } else {
-    //       callback(new Error('Not allowed by CORS'));
-    //     }
-    //   },
-    // };
-    // app.use(cors(corsOptions));
-
     app.use(cors());
 
     // GraphQL

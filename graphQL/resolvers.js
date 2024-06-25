@@ -40,7 +40,7 @@ const resolvers = {
     },
     register: (_, { dto }) => {
       const { name, role, email } = dto;
-      const user = { id: `${users.length + 1}`, name, role: "client", points: 0, email, password: "12345" };
+      const user = { id: `${users.length + 1}`, name, role: role || "client", points: 0, email, password: "12345" };
       users.push(user);
       return user;
     },
@@ -64,7 +64,6 @@ const resolvers = {
           desc: service.desc
         }
       });
-      console.log("🚀 ~ const_userServices=userServices.map ~ _userServices:", _userServices)
 
       const appointment = {
         id: `${appointments.length + 1}`,
@@ -89,4 +88,3 @@ const resolvers = {
 };
 
 module.exports = resolvers;
-console.log(new Date().toISOString())

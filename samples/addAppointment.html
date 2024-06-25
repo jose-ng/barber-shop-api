@@ -31,7 +31,6 @@
 
   <script>
     document.getElementById('fetchDataBtn').addEventListener('click', () => {
-      const userServices = ['1', "2"]
       const queryGQL = {
         query: `
           mutation ($dto: appointmentDto!) {
@@ -49,9 +48,9 @@
     `,
         variables: {
           dto: {
-            "date": "2024-06-24T23:08:15.494Z",
-            "userId": "1",
-            "userServices": userServices,
+            "date": new Date().toISOString(),
+            "userId": "2",
+            "userServices": ['1', "2"],
           }
         },
       };

@@ -25,16 +25,16 @@ type Appointment {
   date: DateTime!
 }
 
-input registerDto {
-  name: String!
-  role: String!
-  email: String!
-}
-
 input appointmentDto {  
   userId: ID!
   userServices: [String]!
   date: DateTime!
+}
+
+input registerDto {
+  name: String!
+  email: String!
+  role: String
 }
 
 type AuthResponse {

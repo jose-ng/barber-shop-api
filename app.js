@@ -3,6 +3,9 @@ const app = express();
 const cors = require('cors');
 const server = require('http').Server(app);
 const useGraphQL = require('./graphQL');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 // start server
 async function startServer() {

@@ -4,7 +4,8 @@ const { startServer, server } = require('./app');
   try {
     await startServer();
     // Run Server
-    await server.listen("4000");
+    const port = process.env.PORT || 3000;
+    await server.listen(port);
     console.log('Listening on port http://localhost:%d', server.address().port);
   } catch (err) {
     console.log(err);

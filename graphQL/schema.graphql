@@ -49,14 +49,15 @@ type Query {
   appointmentsByUserId(userId: ID!): [Appointment]
   rewards: [Reward]
   services: [Service]
+  resetData: Boolean
 }
 
 type Mutation {
   login(email: String!, password: String!): AuthResponse 
   register(dto: registerDto!): User
   addAppointment(dto: appointmentDto!): Appointment
-  addService(name: String!, points: Int!): Service
-  addReward(name: String!, points: Int!): Reward
+  addService(desc: String!, points: Int!): Service
+  addReward(desc: String!, points: Int!): Reward
   redeemReward(userId: ID!, rewardId: ID!): String
 }
 

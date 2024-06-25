@@ -33,15 +33,15 @@
     document.getElementById('fetchDataBtn').addEventListener('click', () => {
       const queryGQL = {
         query: `
-      mutation ($dto: registerDto!) {
-        register(dto: $dto) {
-          id
-          name
-          role
-          email
-        }
-      }
-    `,
+          mutation ($dto: registerDto!) {
+            register(dto: $dto) {
+              id
+              name
+              role
+              email
+            } 
+          }
+      `,
         variables: {
           dto: {
             name: "Luz",

@@ -33,14 +33,26 @@
     document.getElementById('fetchDataBtn').addEventListener('click', () => {
       const queryGQL = {
         query: `
-          query Users {
-              users {
-                  id
-                  name
-                  points
-                  role
-              }
-          }`
+          query {
+            users {
+              id
+              name
+              role
+              email
+              points
+            }
+            services {
+              id
+              desc
+              points
+            }
+            rewards {
+              id
+              desc
+              points
+            } 
+          }
+        `
       }
       axios.post('http://localhost:4000/graphql', queryGQL)
         .then(res => {
@@ -50,11 +62,38 @@
           const { errors } = res.data;
           if (errors) throw new Error(errors[0].message);
 
-          const { users } = res.data.data;
+          const { users, services, rewards } = res.data.data;
+
+          let div = document.createElement('div')
+          div.innerHTML = `<h1>Users</h1>`;
+          dataContainer.appendChild(div);
+
           users.forEach(item => {
-            const div = document.createElement('div');
+            div = document.createElement('div');
             div.className = 'item';
-            div.innerHTML = `<h2>${item.name}</h2><p>${item.role}</p>`;
+            div.innerHTML = `<h3>${item.name}</h3><p>${item.role}</p>`;
+            dataContainer.appendChild(div);
+          });
+
+          div = document.createElement('div')
+          div.innerHTML = `<h1>Rewards</h1>`;
+          dataContainer.appendChild(div);
+
+          rewards.forEach(item => {
+            div = document.createElement('div');
+            div.className = 'item';
+            div.innerHTML = `<h3>${item.desc}</h3><p>${item.points}</p>`;
+            dataContainer.appendChild(div);
+          });
+
+          div = document.createElement('div')
+          div.innerHTML = `<h1>Services</h1>`;
+          dataContainer.appendChild(div);
+
+          services.forEach(item => {
+            div = document.createElement('div');
+            div.className = 'item';
+            div.innerHTML = `<h3>${item.desc}</h3><p>${item.points}</p>`;
             dataContainer.appendChild(div);
           });
         })

@@ -1,21 +1,21 @@
 type User {
   id: ID!
   name: String!
-  role: String!
-  email: String!
+  email: String
+  role: String
   points: Int
 }
 
 type Service {
   id: ID!
-  desc: String!
-  points: Int!
+  desc: String
+  points: Int
 }
 
 type Reward {
   id: ID!
-  desc: String!
-  points: Int!
+  desc: String
+  points: Int
 }
 
 type Appointment {
@@ -23,6 +23,7 @@ type Appointment {
   userId: ID!
   services: [Service]
   date: DateTime!
+  user: User
 }
 
 input appointmentDto {  

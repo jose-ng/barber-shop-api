@@ -12,3 +12,5 @@ const { startServer, server } = require('./app');
     throw new Error('Internal server error', err);
   }
 })();
+
+console.log(new Date().toISOString())

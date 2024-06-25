@@ -21,7 +21,18 @@ const resolvers = {
   Query: {
     users: () => users,
     appointments: () => appointments,
-    appointmentsByDate: (_, { date }) => appointments.filter(a => a.date === date),
+    appointmentsByDate: (_, { date }) => {
+      return appointments.filter(a => {
+        const dateObj1 = new Date(date);
+        const dateObj2 = new Date(a.date);
+
+        // Get the year, month and day parts in ISO format
+        const dateOnly1 = dateObj1.toISOString().split('T')[0];
+        const dateOnly2 = dateObj2.toISOString().split('T')[0];
+        
+        return dateOnly1 === dateOnly2;
+      })
+    },
     appointmentsByUserId: (_, { userId }) => appointments.filter(a => a.userId === userId),
     rewards: () => rewards,
     services: () => services,
@@ -94,7 +105,8 @@ const resolvers = {
         id: `${appointments.length + 1}`,
         userId,
         services: _userServices,
-        date
+        date,
+        user
       }
 
       appointments.push(appointment);

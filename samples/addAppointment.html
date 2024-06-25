@@ -30,6 +30,8 @@
   <div id="data"></div>
 
   <script>
+    const urlApi = 'https://barber-shop-api-rbko.onrender.com/graphql';
+    // const urlApi = 'http://localhost:4000/graphql';
     document.getElementById('fetchDataBtn').addEventListener('click', () => {
       const queryGQL = {
         query: `
@@ -54,7 +56,7 @@
           }
         },
       };
-      axios.post('http://localhost:4000/graphql', queryGQL)
+      axios.post(urlApi, queryGQL)
         .then(res => {
           const dataContainer = document.getElementById('data');
           dataContainer.innerHTML = '';

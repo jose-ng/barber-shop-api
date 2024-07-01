@@ -21,7 +21,7 @@ const useGraphQL = async (app) => {
     playground: true,
     introspection: true,
     plugins: [
-      ApolloServerPluginLandingPageLocalDefault({ footer: false }),
+      ApolloServerPluginLandingPageLocalDefault({ footer: false, graphRef: 'barber-shop@apollo', }),
     ],
   });
 

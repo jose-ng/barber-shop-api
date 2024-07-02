@@ -64,7 +64,8 @@ const resolvers = {
         throw new Error('User not found');
       }
       return {
-        token: fakeToken
+        token: fakeToken,
+        user
       }
     },
     register: (_, { dto }) => {
